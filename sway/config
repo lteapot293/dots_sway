@@ -13,6 +13,9 @@ set $mod Mod4
 #Гапсы
 gaps inner 6
 
+#Одно окно без рамки
+smart_borders on
+
 # Home row direction keys, like vim
 set $left h
 set $down j
