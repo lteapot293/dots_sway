@@ -60,16 +60,12 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 exec /home/teapot293/.config/alternating_layouts.py
 
 	#РАЗМЕР РАМОК
-for_window [tiling] border pixel 3
+for_window [tiling] border pixel 2
 
 	client.focused			#d1d9ec #d1d9ec #d1d9ec #d1d9ec
-	client.focused_inactive	#d1d9ec #d1d9ec #d1d9ec #d1d9ec
 	client.unfocused		#535d6c #535d6c #535d6c #535d6c
 	client.urgent			#d1d9ec #d1d9ec #d1d9ec #d1d9ec
 	client.placeholder		#d1d9ec #d1d9ec #d1d9ec #d1d9ec
-
-
-mouse_warping none
 
 #РАСКЛАДКА КЛАВИАТУРЫ
 	input * {
