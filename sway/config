@@ -22,7 +22,7 @@ set $down j
 set $up k
 set $right l
 
-font pango: Firacode Nerd Font 20
+font pango: Fira code Medium Font 20
 
 #ОБОИ
 	#output * bg /home/teapot293/wallp/1.png fill
@@ -116,6 +116,9 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+
+for_window [app_id=".*"] split toggle
+default_orientation vertical
 
 ### Key bindings
 #
