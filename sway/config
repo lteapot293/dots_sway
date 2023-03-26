@@ -6,13 +6,13 @@ exec "/usr/libexec/polkit-gnome-authentication-agent-1"
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session sway
 exec wl-paste --type text --watch cliphist store #Stores only text data
 exec wl-paste --type image --watch cliphist store #Stores only image data
-exec dunst
-
+exec mako
+exec /home/teapot293/.config/alternating_layouts.py
 # Gtk Theme workaround
-exec = gsettings set org.gnome.desktop.interface gtk-theme Nordic
-exec = gsettings set org.gnome.desktop.interface cursor-size 15
-exec = gsettings set org.gnome.desktop.interface font-name "Fira code medium 12"
-exec = gsettings set org.gnome.desktop.interface cursor-theme "Catppuccin-Mocha-Dark-Cursors"
+exec gsettings set org.gnome.desktop.wm.preferences button-layout ""
+exec  gsettings set org.gnome.desktop.interface gtk-theme Nordic
+exec  gsettings set org.gnome.desktop.interface cursor-size 15
+exec  gsettings set org.gnome.desktop.interface font-name "Fira code medium 11"
 
 #ОТКЛЮЧЕНИЕ ЗАГОЛОВКОВ ОКОН
 default_border pixel 1
@@ -21,8 +21,8 @@ default_border pixel 1
 set $mod Mod4
 
 #Гапсы
-gaps inner 6
-corner_radius 10
+gaps outer 20
+gaps inner 10
 
 #Одно окно без рамки
 smart_borders on
@@ -33,14 +33,16 @@ set $down j
 set $up k
 set $right l
 
-font pango: Fira code Medium Font 20
+font pango: Fira code Nerd Font 11
 
 #ОБОИ
-	#output * bg /home/teapot293/wallp/1.png fill
+	output * bg /home/teapot293/wallp/1.png fill
 
 #ЗАПУСК В ПЛАВАЮЩЕМ РЕЖИМЕ
+	#for_window [title=".*"] focus, split h; for_window [title=".*"] focus, split v
+	#for_window [shell=".*"] title_format "%title :: %shell"
 	for_window [app_id="imv"] floating enable
-
+	for_window [title="Свойства"] floating enable
 # Your preferred terminal emulator
 set $term alacritty
 set $menu dmenu_path | wofi --show drun -I | xargs swaymsg exec --
@@ -55,7 +57,7 @@ bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%- && 
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && /home/teapot293/.config/dunst/scripts/show_mute.sh
 
 #3.Скрины
-bindsym Print exec /home/teapot293/.config/sway/screen
+bindsym Print exec /home/teapot293/.config/dunst/scripts/screen
 	 
 #ТАЧПАД
 	input "1739:52632:MSFT0001:00_06CB:CD98_Touchpad" {
@@ -64,14 +66,9 @@ bindsym Print exec /home/teapot293/.config/sway/screen
        natural_scroll enabled
        middle_emulation enabled
    }
-   	 
-
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
-
-exec /home/teapot293/.config/alternating_layouts.py
-
+   	
 	#РАЗМЕР РАМОК
-for_window [tiling] border pixel 2
+for_window [tiling] border pixel 3
 
 	client.focused			#d1d9ec #d1d9ec #d1d9ec #d1d9ec
 	client.unfocused		#535d6c #535d6c #535d6c #535d6c
@@ -83,43 +80,25 @@ for_window [tiling] border pixel 2
 	    xkb_layout us,ru
 	    xkb_options grp:lalt_toggle
 	    repeat_delay 500
-            repeat_rate 50
+        repeat_rate 50
 	}
 
 	#СПИСОК УСТРОЙСТВ ВВОДА: swaymsg -t get_inputs
 	#СПРАВКА ПО НАСТРОЙКЕ УСТРОЙСТВ ВВОДА: man 5 sway-input
 
+    bindsym --to-code { 
+    $mod+Return exec $term
+    $mod+f exec firefox-wayland
+    $mod+e exec nemo
+    $mod+g exec geany
+    $mod+t exec flatpak run org.telegram.desktop
+    $mod+Shift+v exec cliphist list | wofi -dmenu | cliphist decode | wl-copy
+    $mod+q kill
+    $mod+d exec $menu
+    $mod+Shift+c reload
+	$mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+}
 
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-
-for_window [app_id=".*"] split toggle
-default_orientation vertical
-
-    # Start a terminal
-    bindsym $mod+Return exec $term
-    bindsym $mod+f exec firefox
-    bindsym $mod+e exec nemo
-    bindsym $mod+g exec geany
-    bindsym $mod+Shift+v exec cliphist list | wofi -dmenu | cliphist decode | wl-copy
-    
-    # Kill focused window
-    bindsym $mod+q kill
-
-    # Start your launcher
-    bindsym $mod+d exec $menu
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -216,16 +195,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $right resize shrink width 100px
+    bindsym $down resize grow height 100px
+    bindsym $up resize shrink height 100px
+    bindsym $left resize grow width 100px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 100px
+    bindsym Down resize grow height 100px
+    bindsym Up resize shrink height 100px
+    bindsym Right resize grow width 100px
 
     # Return to default mode
     bindsym Return mode "default"
