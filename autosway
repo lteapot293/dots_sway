@@ -20,9 +20,8 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 # User binaries folder
 export PATH="${HOME}/.local/bin:${PATH}"
 
-export QT_QPA_PLATFORM="wayland-egl;xcb"
+export QT_QPA_PLATFORM="wayland"
 export QT_QPA_PLATFORMTHEME="qt5ct"
-export QT_WAYLAND_FORCE_DPI="physical"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 
 export SDL_VIDEODRIVER=wayland
@@ -56,7 +55,7 @@ export NO_AT_BRIDGE="1"
 # Default applications
 export TERM="alacritty"
 export BROWSER="firefox"
-export EDITOR="nvim"
+export EDITOR="geany"
 
 export XCURSOR_PATH="/usr/share/icons"
 export XCURSOR_PATH="${XCURSOR_PATH}:${HOME}/.local/share/icons:${HOME}/.icons"
