@@ -59,7 +59,6 @@ export EDITOR="geany"
 
 export XCURSOR_PATH="/usr/share/icons"
 export XCURSOR_PATH="${XCURSOR_PATH}:${HOME}/.local/share/icons:${HOME}/.icons"
-export XCURSOR_THEME=Catppuccin-Mocha-Dark-Cursors
 export XCURSOR_SIZE=16
 export GTK_THEME=Nordic
 
