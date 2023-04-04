@@ -6,13 +6,14 @@ exec "/usr/libexec/polkit-gnome-authentication-agent-1"
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session sway
 exec wl-paste --type text --watch cliphist store #Stores only text data
 exec wl-paste --type image --watch cliphist store #Stores only image data
-exec mako
+exec dunst
 exec /home/teapot293/.config/alternating_layouts.py
 # Gtk Theme workaround
-exec gsettings set org.gnome.desktop.wm.preferences button-layout ""
-exec  gsettings set org.gnome.desktop.interface gtk-theme Nordic
-exec  gsettings set org.gnome.desktop.interface cursor-size 15
-exec  gsettings set org.gnome.desktop.interface font-name "Fira code medium 11"
+exec_always autotiling
+exec_always gsettings set org.gnome.desktop.wm.preferences button-layout ""
+exec_always gsettings set org.gnome.desktop.interface gtk-theme Nordic
+exec_always gsettings set org.gnome.desktop.interface cursor-size 15
+exec_always gsettings set org.gnome.desktop.interface font-name "Fira code medium 11"
 
 #ОТКЛЮЧЕНИЕ ЗАГОЛОВКОВ ОКОН
 default_border pixel 1
