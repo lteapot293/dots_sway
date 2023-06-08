@@ -11,9 +11,10 @@ exec /home/teapot293/.config/alternating_layouts.py
 # Gtk Theme workaround
 exec_always autotiling
 exec_always gsettings set org.gnome.desktop.wm.preferences button-layout ""
-exec_always gsettings set org.gnome.desktop.interface gtk-theme Nordic
+exec_always gsettings set org.gnome.desktop.interface gtk-theme Dracula
+exec = gsettings set org.gnome.desktop.interface icon-theme "Tela"
 exec_always gsettings set org.gnome.desktop.interface cursor-size 15
-exec_always gsettings set org.gnome.desktop.interface font-name "Fira code medium 11"
+exec_always gsettings set org.gnome.desktop.interface font-name "Ubuntu Light 12"
 
 #ОТКЛЮЧЕНИЕ ЗАГОЛОВКОВ ОКОН
 default_border pixel 1
@@ -37,7 +38,7 @@ set $right l
 font pango: Fira code Nerd Font 11
 
 #ОБОИ
-	output * bg /home/teapot293/wallp/1.png fill
+	output * bg /home/teapot293/wallp/1.jpg fill
 
 #ЗАПУСК В ПЛАВАЮЩЕМ РЕЖИМЕ
 	#for_window [title=".*"] focus, split h; for_window [title=".*"] focus, split v
@@ -79,9 +80,9 @@ for_window [tiling] border pixel 3
 #РАСКЛАДКА КЛАВИАТУРЫ
 	input * {
 	    xkb_layout us,ru
-	    xkb_options grp:lalt_toggle
+	    xkb_options grp:caps_toggle
 	    repeat_delay 500
-        repeat_rate 50
+            repeat_rate 50
 	}
 
 	#СПИСОК УСТРОЙСТВ ВВОДА: swaymsg -t get_inputs
