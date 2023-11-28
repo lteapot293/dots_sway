@@ -104,10 +104,10 @@ for_window [tiling] border pixel 3
     $mod+f exec google-chrome-stable
     $mod+e exec nemo
     $mod+g exec gedit
-    $mod+t exec flatpak run org.telegram.desktop
-    $mod+Shift+v exec clipman pick -t wofi
+    $mod+t exec telegram-desktop
     $mod+q kill
     $mod+d exec $menu
+    $mod+Shift+w killall waybar; waybar &
     $mod+Shift+c reload
 	$mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 }
@@ -241,3 +241,4 @@ swaybar_command waybar
 	}
 
 include /etc/sway/config.d/*
+include /home/manka/.config/sway/env
