@@ -2,24 +2,30 @@
 
 #Autorun
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec "/usr/libexec/polkit-gnome-authentication-agent-1"
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session sway
 exec mako
-exec wl-paste -t text --watch clipman store 
+exec wl-clip-persist --clipboard regular --display wayland-1
+exec wl-paste --list-types | wl-copy
 exec nm-applet
 exec blueman-applet
+
 # Gtk Theme
-exec_always autotiling
-exec_always gsettings set org.gnome.desktop.wm.preferences button-layout ""
-exec_always gsettings set org.gnome.desktop.interface gtk-theme Dracula
-exec_always gsettings set org.gnome.desktop.interface icon-theme "Tela"
+#exec_always autotiling
+exec_always gsettings set org.cinnamon.desktop.default-applications.terminal exec 'kitty'
+exec_always gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
+exec_always gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
 exec_always gsettings set org.gnome.desktop.interface cursor-size 15
-exec_always gsettings set org.gnome.desktop.interface font-name Ubuntu Light 12
+exec_always gsettings set org.gnome.desktop.interface font-name "Noto Sans Regular 12"
+exec_always gsettings set org.gnome.desktop.interface icon-theme "Tela-circle-dracula"
+exec_always gsettings set org.gnome.desktop.interface cursor-theme "Catppuccin-Mocha-Dark-Cursors"
+
+font pango: Noto Sans Regular 12
 
 #ОТКЛЮЧЕНИЕ ЗАГОЛОВКОВ ОКОН
 default_border pixel 1
 default_floating_border none
-
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -38,10 +44,8 @@ set $down j
 set $up k
 set $right l
 
-font pango: Ubuntu Light 12
-
 #ОБОИ
-	output * bg /home/teapot293/wallp/1.jpg fill
+	output * bg /home/manka/wallp/1.png fill
 
 #ЗАПУСК В ПЛАВАЮЩЕМ РЕЖИМЕ
 	#for_window [title=".*"] focus, split h; for_window [title=".*"] focus, split v
@@ -53,17 +57,17 @@ font pango: Ubuntu Light 12
 	#for_window [title="steam"] floating enable
 
 # Your preferred terminal emulator
-set $term alacritty
+set $term kitty
 set $menu dmenu_path | wofi --show drun -I | xargs swaymsg exec --
 
 #1.Яркость:
-bindsym XF86MonBrightnessUp exec brightnessctl s +10% && /home/teapot293/.config/dunst/scripts/show_brightness.sh
-bindsym XF86MonBrightnessDown exec brightnessctl s 10%- && /home/teapot293/.config/dunst/scripts/show_brightness.sh
+bindsym XF86MonBrightnessUp exec brightnessctl s +10% 
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%- 
 
 #2.Звук:
-bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+ && /home/teapot293/.config/dunst/scripts/show_volume.sh
-bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%- && /home/teapot293/.config/dunst/scripts/show_volume.sh
-bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && /home/teapot293/.config/dunst/scripts/show_mute.sh
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
 #3.Скрины
 bindsym Print exec grimshot copy area
