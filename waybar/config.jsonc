@@ -7,9 +7,9 @@
     "margin-bottom": 0,
     "margin-left": 0,
     "margin-right": 0,
-    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-left": ["sway/workspaces", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "battery", "pulseaudio", "backlight", "hyprland/language", "custom/poff"],
+    "modules-right": ["tray", "battery", "pulseaudio", "backlight", "sway/language", "custom/poff"],
     // Modules configuration
 
     "tray": {
@@ -18,15 +18,14 @@
         "spacing": 10
     },
     
-    "hyprland/language": {
+    "sway/language": {
         "format": " {} ",
         "format-en": "󰰎  us",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next",        
         "format-ru": "󰰍  ru",
         },
-	
-	"dwl/tags": {
-	"num-tags": 9
-	},
+
+
 	
 	"custom/poff": {
        "on-click": "/home/manka/.config/hypr/wofi-power.sh",
@@ -42,7 +41,7 @@
 	},
 	
 
-	"hyprland/workspaces": {
+	"sway/workspaces": {
         "active-only": false,
         "all-outputs": true,
         "disable-scroll": false,
@@ -63,7 +62,7 @@
     },
     },
 
-      "hyprland/window": {
+      "sway/window": {
         "format": "{}"
     },
 
